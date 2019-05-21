@@ -1,0 +1,439 @@
+- stack:  METHOD_BODY	$	
+- input:  int	id	;	while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: STATEMENT_LIST
+
+
+- stack:  STATEMENT_LIST	$	
+- input:  int	id	;	while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: STATEMENT  STATEMENT_LIST'
+
+
+- stack:  STATEMENT	STATEMENT_LIST'	$	
+- input:  int	id	;	while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: DECLARATION 
+
+
+- stack:  DECLARATION	STATEMENT_LIST'	$	
+- input:  int	id	;	while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: PRIMITIVE_TYPE id ;
+
+
+- stack:  PRIMITIVE_TYPE	id	;	STATEMENT_LIST'	$	
+- input:  int	id	;	while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: int 
+
+
+- stack:  int	id	;	STATEMENT_LIST'	$	
+- input:  int	id	;	while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(int)
+
+
+- stack:  id	;	STATEMENT_LIST'	$	
+- input:  id	;	while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(id)
+
+
+- stack:  ;	STATEMENT_LIST'	$	
+- input:  ;	while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(;)
+
+
+- stack:  STATEMENT_LIST'	$	
+- input:  while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action:  STATEMENT STATEMENT_LIST'
+
+
+- stack:  STATEMENT	STATEMENT_LIST'	$	
+- input:  while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: WHILE 
+
+
+- stack:  WHILE	STATEMENT_LIST'	$	
+- input:  while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: while ( EXPRESSION ) { STATEMENT }
+
+
+- stack:  while	(	EXPRESSION	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  while	(	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(while)
+
+
+- stack:  (	EXPRESSION	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  (	id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(()
+
+
+- stack:  EXPRESSION	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: SIMPLE_EXPRESSION  EXPRESSION'
+
+
+- stack:  SIMPLE_EXPRESSION	EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action:  TERM  SIMPLE_EXPRESSION'
+
+
+- stack:  TERM	SIMPLE_EXPRESSION'	EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: FACTOR  TERM'
+
+
+- stack:  FACTOR	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: id 
+
+
+- stack:  id	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  id	relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(id)
+
+
+- stack:  TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: \L
+
+
+- stack:  SIMPLE_EXPRESSION'	EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: \L
+
+
+- stack:  EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: relop SIMPLE_EXPRESSION
+
+
+- stack:  relop	SIMPLE_EXPRESSION	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  relop	num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(relop)
+
+
+- stack:  SIMPLE_EXPRESSION	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action:  TERM  SIMPLE_EXPRESSION'
+
+
+- stack:  TERM	SIMPLE_EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: FACTOR  TERM'
+
+
+- stack:  FACTOR	TERM'	SIMPLE_EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: num 
+
+
+- stack:  num	TERM'	SIMPLE_EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  num	)	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(num)
+
+
+- stack:  TERM'	SIMPLE_EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  )	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: \L
+
+
+- stack:  SIMPLE_EXPRESSION'	)	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  )	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: \L
+
+
+- stack:  )	{	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  )	{	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match())
+
+
+- stack:  {	STATEMENT	}	STATEMENT_LIST'	$	
+- input:  {	id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match({)
+
+
+- stack:  STATEMENT	}	STATEMENT_LIST'	$	
+- input:  id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: ASSIGNMENT
+
+
+- stack:  ASSIGNMENT	}	STATEMENT_LIST'	$	
+- input:  id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: id = EXPRESSION ;
+
+
+- stack:  id	=	EXPRESSION	;	}	STATEMENT_LIST'	$	
+- input:  id	=	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(id)
+
+
+- stack:  =	EXPRESSION	;	}	STATEMENT_LIST'	$	
+- input:  =	id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(=)
+
+
+- stack:  EXPRESSION	;	}	STATEMENT_LIST'	$	
+- input:  id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: SIMPLE_EXPRESSION  EXPRESSION'
+
+
+- stack:  SIMPLE_EXPRESSION	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action:  TERM  SIMPLE_EXPRESSION'
+
+
+- stack:  TERM	SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: FACTOR  TERM'
+
+
+- stack:  FACTOR	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: id 
+
+
+- stack:  id	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  id	addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(id)
+
+
+- stack:  TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: \L
+
+
+- stack:  SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action:  addop TERM SIMPLE_EXPRESSION'
+
+
+- stack:  addop	TERM	SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  addop	num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(addop)
+
+
+- stack:  TERM	SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: FACTOR  TERM'
+
+
+- stack:  FACTOR	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: num 
+
+
+- stack:  num	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  num	;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(num)
+
+
+- stack:  TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  ;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: \L
+
+
+- stack:  SIMPLE_EXPRESSION'	EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  ;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: \L
+
+
+- stack:  EXPRESSION'	;	}	STATEMENT_LIST'	$	
+- input:  ;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: \L
+
+
+- stack:  ;	}	STATEMENT_LIST'	$	
+- input:  ;	if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(;)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  if	(	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (if)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  (	id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (()
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  id	relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (id)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  relop	num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (relop)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  num	)	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (num)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  )	)	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at ())
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  )	{	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at ())
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  {	id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at ({)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  id	=	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (id)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  =	id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (=)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  id	addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (id)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  addop	num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (addop)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  num	;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (num)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  ;	}	else	{	id	=	id	addop	id	;	}	$	
+- Action: Error at (;)
+
+
+- stack:  }	STATEMENT_LIST'	$	
+- input:  }	else	{	id	=	id	addop	id	;	}	$	
+- Action: match(})
+
+
+- stack:  STATEMENT_LIST'	$	
+- input:  else	{	id	=	id	addop	id	;	}	$	
+- stack:  STATEMENT_LIST'	$	
+- input:  {	id	=	id	addop	id	;	}	$	
+- stack:  STATEMENT_LIST'	$	
+- input:  id	=	id	addop	id	;	}	$	
+- Action:  STATEMENT STATEMENT_LIST'
+
+
+- stack:  STATEMENT	STATEMENT_LIST'	$	
+- input:  id	=	id	addop	id	;	}	$	
+- Action: ASSIGNMENT
+
+
+- stack:  ASSIGNMENT	STATEMENT_LIST'	$	
+- input:  id	=	id	addop	id	;	}	$	
+- Action: id = EXPRESSION ;
+
+
+- stack:  id	=	EXPRESSION	;	STATEMENT_LIST'	$	
+- input:  id	=	id	addop	id	;	}	$	
+- Action: match(id)
+
+
+- stack:  =	EXPRESSION	;	STATEMENT_LIST'	$	
+- input:  =	id	addop	id	;	}	$	
+- Action: match(=)
+
+
+- stack:  EXPRESSION	;	STATEMENT_LIST'	$	
+- input:  id	addop	id	;	}	$	
+- Action: SIMPLE_EXPRESSION  EXPRESSION'
+
+
+- stack:  SIMPLE_EXPRESSION	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  id	addop	id	;	}	$	
+- Action:  TERM  SIMPLE_EXPRESSION'
+
+
+- stack:  TERM	SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  id	addop	id	;	}	$	
+- Action: FACTOR  TERM'
+
+
+- stack:  FACTOR	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  id	addop	id	;	}	$	
+- Action: id 
+
+
+- stack:  id	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  id	addop	id	;	}	$	
+- Action: match(id)
+
+
+- stack:  TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  addop	id	;	}	$	
+- Action: \L
+
+
+- stack:  SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  addop	id	;	}	$	
+- Action:  addop TERM SIMPLE_EXPRESSION'
+
+
+- stack:  addop	TERM	SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  addop	id	;	}	$	
+- Action: match(addop)
+
+
+- stack:  TERM	SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  id	;	}	$	
+- Action: FACTOR  TERM'
+
+
+- stack:  FACTOR	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  id	;	}	$	
+- Action: id 
+
+
+- stack:  id	TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  id	;	}	$	
+- Action: match(id)
+
+
+- stack:  TERM'	SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  ;	}	$	
+- Action: \L
+
+
+- stack:  SIMPLE_EXPRESSION'	EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  ;	}	$	
+- Action: \L
+
+
+- stack:  EXPRESSION'	;	STATEMENT_LIST'	$	
+- input:  ;	}	$	
+- Action: \L
+
+
+- stack:  ;	STATEMENT_LIST'	$	
+- input:  ;	}	$	
+- Action: match(;)
+
+
+- stack:  STATEMENT_LIST'	$	
+- input:  }	$	
+- Action: Error at (})
+
+
+- stack:  STATEMENT_LIST'	$	
+- input:  $	
+- Action: \L
+
+
+- stack:  $	
+- input:  $	
+- Action: match($)
+
+
